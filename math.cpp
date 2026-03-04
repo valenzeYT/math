@@ -13,7 +13,7 @@ namespace math_lib {
 static constexpr double PI_VAL = 3.14159265358979323846;
 static constexpr double E_VAL = 2.71828182845904523536;
 static constexpr double TAU_VAL = 2 * PI_VAL;
-static constexpr double PHI_VAL = (1 + std::sqrt(5))/2;
+static constexpr double PHI_VAL = 1.6180339887498948482;
 
 double factorial(double n) {
     if (n < 0) throw std::runtime_error("factorial expects non-negative integer");

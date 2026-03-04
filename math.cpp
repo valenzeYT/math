@@ -13,6 +13,7 @@ namespace math_lib {
 static constexpr double PI_VAL = 3.14159265358979323846;
 static constexpr double E_VAL = 2.71828182845904523536;
 static constexpr double TAU_VAL = 2 * PI_VAL;
+static constexpr double PHI_VAL = (1 + std::sqrt(5))/2;
 
 double factorial(double n) {
     if (n < 0) throw std::runtime_error("factorial expects non-negative integer");
@@ -100,7 +101,7 @@ double rad2deg_val(double rad) { return rad * 180.0 / PI_VAL; }
 double pi_val() { return PI_VAL; }
 double tau_val() { return TAU_VAL; }
 double e_val() { return E_VAL; }
-
+double phi_val() { return PHI_VAL; }
 } // namespace math_lib
 
 extern "C" __declspec(dllexport)
@@ -363,6 +364,11 @@ void register_module() {
                                       [&interp](const std::vector<Value>& args) -> Value {
                                           interp.expectArity(args, 0, "math.e");
                                           return Value::fromNumber(math_lib::e_val());
+                                      });
+        interp.registerModuleFunction("math", "phi",
+                                      [&interp](const std::vector<Value>& args) -> Value {
+                                          interp.expectArity(args, 0, "math.phi");
+                                          return Value::fromNumber(math_lib::phi_val());
                                       });
     });
 }

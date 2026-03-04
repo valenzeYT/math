@@ -11,6 +11,7 @@ namespace math_lib {
 
 static constexpr double PI_VAL = 3.14159265358979323846;
 static constexpr double E_VAL = 2.71828182845904523536;
+static constexpr double TAU_VAL = 2 * PI_VAL;
 
 double factorial(double n) {
     if (n < 0) throw std::runtime_error("factorial expects non-negative integer");
@@ -96,6 +97,7 @@ double lcm_val(double a, double b) {
 double deg2rad_val(double deg) { return deg * PI_VAL / 180.0; }
 double rad2deg_val(double rad) { return rad * 180.0 / PI_VAL; }
 double pi_val() { return PI_VAL; }
+double tau_val() { return TAU_VAL; }
 
 } // namespace math_lib
 
@@ -349,6 +351,11 @@ void register_module() {
                                       [&interp](const std::vector<Value>& args) -> Value {
                                           interp.expectArity(args, 0, "math.pi");
                                           return Value::fromNumber(math_lib::pi_val());
+                                      });
+        interp.registerModuleFunction("math", "tau",
+                                      [&interp](const std::vector<Value>& args) -> Value {
+                                          interp.expectArity(args, 0, "math.tau");
+                                          return Value::fromNumber(math_lib::tau_val());
                                       });
     });
 }

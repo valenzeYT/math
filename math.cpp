@@ -9,6 +9,7 @@
 
 namespace math_lib {
 
+// CONSTANTS
 static constexpr double PI_VAL = 3.14159265358979323846;
 static constexpr double E_VAL = 2.71828182845904523536;
 static constexpr double TAU_VAL = 2 * PI_VAL;
@@ -98,6 +99,7 @@ double deg2rad_val(double deg) { return deg * PI_VAL / 180.0; }
 double rad2deg_val(double rad) { return rad * 180.0 / PI_VAL; }
 double pi_val() { return PI_VAL; }
 double tau_val() { return TAU_VAL; }
+double e_val() { return E_VAL; }
 
 } // namespace math_lib
 
@@ -356,6 +358,11 @@ void register_module() {
                                       [&interp](const std::vector<Value>& args) -> Value {
                                           interp.expectArity(args, 0, "math.tau");
                                           return Value::fromNumber(math_lib::tau_val());
+                                      });
+        interp.registerModuleFunction("math", "e",
+                                      [&interp](const std::vector<Value>& args) -> Value {
+                                          interp.expectArity(args, 0, "math.e");
+                                          return Value::fromNumber(math_lib::e_val());
                                       });
     });
 }
